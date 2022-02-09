@@ -1,13 +1,15 @@
-//
-//  main.c
-//  sort_homework
-//
-//  Created by Никита Наклескин on 09.02.2022.
-//
-
 #include <stdio.h>
+#include "stdlib.h"
+#include "limits.h"
 
-int main(int argc, const char * argv[]) {
+
+void bubble_sort(int* a, int n);
+
+
+void quick_sort(int* a, int n);
+
+
+int main(void) {
     // insert code here...
     printf("Hello, World!\n");
     return 0;
