@@ -14,7 +14,7 @@ void gen_rand(int n) // generate a file vith random values
     }
     fclose(input);
 }
-
+    
 
 void gen_rev(int n) // generate a file with reverse values
 {
@@ -61,35 +61,39 @@ void bubble_sort(int* a, int n, int* count) // Bubble algorithm
 }
 
 
-void quick_sort(int* a, int n, int count[2]) // qsort algorithm not working
+void qsort_alg(int* a, int first, int last, int count[2])
 {
-    int count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
-    int mid = abs(a[(n - 1) / 2]), last = n - 1, c;
-    for(int i = 0; i < n / 2; i++)
+    if(last > first)
     {
-        count_cmp++; // count of comparisons ++
-        if(abs(a[i]) < mid)
+        int count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
+        int left = first, right = last;
+        int mid = abs(a[(left + right) / 2]);
+        while(left < right)
         {
-            for(int j = last; j > n / 2; j--)
+            while(abs(a[left]) > mid)
             {
-                count_cmp++;// count of comparisons ++
-                if(abs(a[j]) > mid)
-                {
-                    count_swap++; // count of swaps ++
-                    c = a[i];
-                    a[i] = a[j];
-                    a[j] = c;
-                    break;
-                }
+                count_cmp++;
+                left++;
+            }
+            while(abs(a[right]) < mid)
+            {
+                count_cmp++;
+                right--;
+            }
+            if(left <= right)
+            {
+                count_swap++;
+                int c = a[left];
+                a[left] = a[right];
+                a[right] = c;
+                left++;
+                right--;
             }
         }
-    }
-    count[0] += count_cmp; // save the number of comparisons
-    count[1] += count_swap; // save the nubber of swaps
-    if(n > 0) // Change this block
-    {
-        quick_sort(a + (n / 2), n / 2, count);
-        quick_sort(a, n / 2, count);
+        count[0] += count_cmp;
+        count[1] += count_swap;
+        qsort_alg(a, first, right, count);
+        qsort_alg(a, left, last, count);
     }
 }
 
@@ -103,18 +107,16 @@ int main(void) {
     gen_rand(n);
     gen_sorted(n);
     gen_rev(n);
-    
-    
     // BUBBLE SORT RANDOM VALUES
-    FILE* input_1 = fopen("data/data1.txt", "r"); // input for random values bubble sort
+    FILE* input_1_1 = fopen("data/data1.txt", "r"); // input for random values bubble sort
     FILE* output_1_1 = fopen("data/output1.1.txt", "w");  // output for random values bubble sort
     int* a = malloc(n * sizeof(int));
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_1, "%d", &a[i]);
+        fscanf(input_1_1, "%d", &a[i]);
     }
     fprintf(res, "\nBubble sort random values\n");
-    //bubble_sort(a, n, count);
+    bubble_sort(a, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
@@ -122,15 +124,16 @@ int main(void) {
     {
         fprintf(output_1_1, "%d\n", a[i]);
     }
-    
+    fclose(input_1_1);
     // QUICK SORT RANDOM VALUES
+    FILE* input_1_2 = fopen("data/data1.txt", "r"); // input for random values bubble sort
     FILE* output_1_2 = fopen("data/output1.2.txt", "w");  // output for random values bubble sort
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_1, "%d", &a[i]);
+        fscanf(input_1_2, "%d", &a[i]);
     }
     fprintf(res, "\n\nQuick sort random values\n");
-    quick_sort(a, n, count);
+    qsort_alg(a, 0, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
@@ -138,14 +141,13 @@ int main(void) {
     {
         fprintf(output_1_2, "%d\n", a[i]);
     }
-    
-    
+    fclose(input_1_2);
     // BUBBLE SORT SORTED VALUES
-    FILE* input_2 = fopen("data/data2.txt", "r");
+    FILE* input_2_1 = fopen("data/data2.txt", "r");
     FILE* output_2_1 = fopen("data/output2.1.txt", "w");
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_2, "%d", &a[i]);
+        fscanf(input_2_1, "%d", &a[i]);
     }
     fprintf(res, "\n\nBubble sort sorted n to 1 values\n");
     //bubble_sort(a, n, count);
@@ -156,16 +158,16 @@ int main(void) {
     {
         fprintf(output_2_1, "%d\n", a[i]);
     }
-    
-    
+    fclose(input_2_1);
     // QUICK SORT SORTED VALUES
+    FILE* input_2_2 = fopen("data/data2.txt", "r");
     FILE* output_2_2 = fopen("data/output2.2.txt", "w");
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_2, "%d", &a[i]);
+        fscanf(input_2_2, "%d", &a[i]);
     }
     fprintf(res, "\n\nQuick sort sorted n to 1 values\n");
-    quick_sort(a, n, count);
+    qsort_alg(a, 0, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
@@ -173,17 +175,16 @@ int main(void) {
     {
         fprintf(output_2_2, "%d\n", a[i]);
     }
-    
-    
+    fclose(input_2_2);
     // BUBBLE SORT REVERSE VALUES
-    FILE* input_3 = fopen("data/data3.txt", "r");
+    FILE* input_3_1 = fopen("data/data3.txt", "r");
     FILE* output_3_1 = fopen("data/output3.1.txt", "w");
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_3, "%d", &a[i]);
+        fscanf(input_3_1, "%d", &a[i]);
     }
     fprintf(res, "\n\nBubble sort sorted 1 to n values\n");
-    //bubble_sort(a, n, count);
+    bubble_sort(a, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
@@ -191,16 +192,16 @@ int main(void) {
     {
         fprintf(output_3_1, "%d\n", a[i]);
     }
-    
-    
+    fclose(input_3_1);
     // QUICK SORT REVERSE VALUES
+    FILE* input_3_2 = fopen("data/data3.txt", "r");
     FILE* output_3_2 = fopen("data/output3.2.txt", "w");
     for(int i = 0; i < n; i++)  // scan data from input file
     {
-        fscanf(input_3, "%d", &a[i]);
+        fscanf(input_3_2, "%d", &a[i]);
     }
     fprintf(res, "\n\nQuick sort sorted 1 to n values\n");
-    quick_sort(a, n, count);
+    qsort_alg(a, 0, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
@@ -208,11 +209,7 @@ int main(void) {
     {
         fprintf(output_3_2, "%d\n", a[i]);
     }
-    
-    
-    fclose(input_1);
-    fclose(input_2);
-    fclose(input_3);
+    fclose(input_3_2);
     fclose(output_1_1);
     fclose(output_1_2);
     fclose(output_2_1);
