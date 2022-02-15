@@ -4,17 +4,16 @@
 #include "math.h"
 
 
-
 void gen_rand(int n) // generate a file vith random values
 {
     FILE* input = fopen("data/data1.txt", "a");
     for(int i = 0; i < n; i++)
     {
-        fprintf(input, "%d\n", -1000 + rand()%1000);
+        fprintf(input, "%d\n", -5000 + rand()%5000);
     }
     fclose(input);
 }
-    
+
 
 void gen_rev(int n) // generate a file with reverse values
 {
@@ -38,7 +37,7 @@ void gen_sorted(int n) // generate a file with sorted values
 }
 
 
-void bubble_sort(int* a, int n, int* count) // Bubble algorithm
+void bubble_sort(int* a, int n, int* count) // Bubble algorithm (read README file)
 {
     int c;
     int count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
@@ -61,7 +60,7 @@ void bubble_sort(int* a, int n, int* count) // Bubble algorithm
 }
 
 
-void qsort_alg(int* a, int first, int last, int count[2])
+void qsort_alg(int* a, int first, int last, int count[2]) // qsort algorithm (read README file)
 {
     if(last > first)
     {
@@ -150,7 +149,7 @@ int main(void) {
         fscanf(input_2_1, "%d", &a[i]);
     }
     fprintf(res, "\n\nBubble sort sorted n to 1 values\n");
-    //bubble_sort(a, n, count);
+    bubble_sort(a, n, count);
     fprintf(res, "Count_cmp = %d\nCount_swap = %d\n", count[0], count[1]);
     count[0] = 0;
     count[1] = 0;
