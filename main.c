@@ -11,7 +11,7 @@ void gen_rand(int n) // generate a file vith random values
     FILE* input = fopen("data/data1.txt", "a");
     for(int i = 0; i < n; i++)
     {
-        fprintf(input, "%d\n", -5000 + rand()%10001);
+        fprintf(input, "%d\n", (-1) * n + rand()%(2 * n + 1));
     }
     fclose(input);
 }
