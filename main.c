@@ -13,13 +13,13 @@ int main(void) {
     int n; // number of numbers to sort
     printf("Print n = ");
     scanf("%d", &n);
-    gen_rand(n);
+    gen_rand(n); // generate files
     gen_sorted(n);
     gen_rev(n);
     // BUBBLE SORT RANDOM VALUES
     FILE* input_1_1 = fopen("data/data1.txt", "r"); // input random values from the file
     FILE* output_1_1 = fopen("data/output1.1.txt", "w");  // output file for bubble sort random input
-    int* a = malloc(n * sizeof(int));
+    int* a = (int*) malloc(n * sizeof(int));
     for(int i = 0; i < n; i++)  // scan data from input file
     {
         fscanf(input_1_1, "%d", &a[i]);
