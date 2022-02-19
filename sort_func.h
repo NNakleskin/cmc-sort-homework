@@ -4,10 +4,10 @@
 #include "limits.h"
 
 
-void bubble_sort(long* a, int n, int* count) // Bubble algorithm (read README file)
+void bubble_sort(long long* a, int n, int* count) // Bubble algorithm (read README file)
 {
-    long c;
-    int count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
+    long long c;
+    long long count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
     for(int j = 0; j < n - 1; j++)
     {
         for(int i = 0; i < n - 1; i++)
@@ -27,11 +27,11 @@ void bubble_sort(long* a, int n, int* count) // Bubble algorithm (read README fi
 }
 
 
-void qsort_alg(long* a, int first, int last, int count[2]) // qsort algorithm (read README file)
+void qsort_alg(long long* a, int first, int last, int count[2]) // qsort algorithm (read README file)
 {
     if(last > first)
     {
-        long count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
+        long long count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
         int left = first, right = last;
         int mid = abs(a[(left + right) / 2]);
         while(left < right)
@@ -49,7 +49,7 @@ void qsort_alg(long* a, int first, int last, int count[2]) // qsort algorithm (r
             if(left < right)
             {
                 count_swap++;
-                long c = a[left];
+                long long c = a[left];
                 a[left] = a[right];
                 a[right] = c;
                 left++;
