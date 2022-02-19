@@ -1,3 +1,8 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "math.h"
+
+
 void bubble_sort(int* a, int n, int* count) // Bubble algorithm (read README file)
 {
     int c;
