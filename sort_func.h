@@ -1,6 +1,15 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "math.h"
+#include "limits.h"
+
+/* This solves the issue of using the standard abs() function
+ * This function is described here:
+    https://stackoverflow.com/questions/22268815/absolute-value-of-int-min
+ */
+unsigned int absu(int value) {
+    return (value < 0) ? -((unsigned int)value) : (unsigned int)value;
+}
 
 
 void bubble_sort(int* a, int n, int* count) // Bubble algorithm (read README file)
@@ -12,7 +21,7 @@ void bubble_sort(int* a, int n, int* count) // Bubble algorithm (read README fil
         for(int i = 0; i < n - 1; i++)
         {
             count_cmp++; // count of comparisons ++
-            if(abs(a[i]) < abs(a[i + 1]))
+            if(absu(a[i]) < absu(a[i + 1]))
             {
                 count_swap++; // count of swaps ++
                 c = a[i];
@@ -32,15 +41,15 @@ void qsort_alg(int* a, int first, int last, int count[2]) // qsort algorithm (re
     {
         int count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
         int left = first, right = last;
-        int mid = abs(a[(left + right) / 2]);
+        int mid = absu(a[(left + right) / 2]);
         while(left < right)
         {
-            while(abs(a[left]) > mid)
+            while(absu(a[left]) > mid)
             {
                 count_cmp++;
                 left++;
             }
-            while(abs(a[right]) < mid)
+            while(absu(a[right]) < mid)
             {
                 count_cmp++;
                 right--;
