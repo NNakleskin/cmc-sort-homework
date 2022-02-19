@@ -6,7 +6,7 @@
 /* This solves the issue of using the standard abs() function
  * This function is described here:
     https://stackoverflow.com/questions/22268815/absolute-value-of-int-min
- */
+*/
 unsigned int absu(int value) {
     return (value < 0) ? -((unsigned int)value) : (unsigned int)value;
 }
@@ -54,12 +54,17 @@ void qsort_alg(int* a, int first, int last, int count[2]) // qsort algorithm (re
                 count_cmp++;
                 right--;
             }
-            if(left <= right)
+            if(left < right)
             {
                 count_swap++;
                 int c = a[left];
                 a[left] = a[right];
                 a[right] = c;
+                left++;
+                right--;
+            }
+            else
+            {
                 left++;
                 right--;
             }
