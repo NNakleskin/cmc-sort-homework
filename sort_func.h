@@ -4,7 +4,7 @@
 #include "limits.h"
 
 
-void bubble_sort(long long* a, int n, int* count) // Bubble algorithm (read README file)
+void bubble_sort(long long* a, int n, int count[2]) // Bubble algorithm (read README file)
 {
     long long c;
     long long count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
