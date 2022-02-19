@@ -34,7 +34,7 @@ void qsort_alg(long long* a, int first, int last, int count[2]) // qsort algorit
         long long count_cmp = 0, count_swap = 0; // counter of swaps and comparisons
         int left = first, right = last;
         int mid = abs(a[(left + right) / 2]);
-        while(left < right)
+        while(left <= right)
         {
             while(abs(a[left]) > mid)
             {
@@ -46,17 +46,15 @@ void qsort_alg(long long* a, int first, int last, int count[2]) // qsort algorit
                 count_cmp++;
                 right--;
             }
-            if(left < right)
+            if(left <= right)
             {
-                count_swap++;
-                long long c = a[left];
-                a[left] = a[right];
-                a[right] = c;
-                left++;
-                right--;
-            }
-            else
-            {
+                if(left != right)
+                {
+                    count_swap++;
+                    long long c = a[left];
+                    a[left] = a[right];
+                    a[right] = c;
+                }
                 left++;
                 right--;
             }

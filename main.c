@@ -8,7 +8,7 @@
 
 
 int main(void) {
-    FILE* res = fopen("data/results.txt", "a");
+    FILE* res = fopen("data/results.txt", "w");
     int* count = calloc(2, sizeof(int));
     int n; // number of numbers to sort
     printf("Print n = ");
