@@ -8,7 +8,7 @@
 void gen_rand(int n) // generate a file vith random values from -n to n
 {
     srand(time(NULL));
-    FILE* input = fopen("data/data1.txt", "a");
+    FILE* input = fopen("data/data1.txt", "w");
     for(int i = 0; i < n; i++)
     {
         fprintf(input, "%d\n", (-1) * n + rand()%(2 * n + 1));
@@ -19,7 +19,7 @@ void gen_rand(int n) // generate a file vith random values from -n to n
 
 void gen_rev(int n) // generate a file with sorted n to 1 values
 {
-    FILE* input = fopen("data/data2.txt", "a");
+    FILE* input = fopen("data/data2.txt", "w");
     for(int i = n; i > 0; i--)
     {
         fprintf(input, "%d\n", i);
@@ -30,7 +30,7 @@ void gen_rev(int n) // generate a file with sorted n to 1 values
 
 void gen_sorted(int n) // generate a file with sorted 1 to n values
 {
-    FILE* input = fopen("data/data3.txt", "a");
+    FILE* input = fopen("data/data3.txt", "w");
     for(int i = 1; i <= n; i++)
     {
         fprintf(input, "%d\n", i);
